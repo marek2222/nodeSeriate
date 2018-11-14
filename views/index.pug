@@ -1,8 +1,8 @@
 extends layout
- 
+
 block content
     h1 #{tytul}
     ul.list-group
         each artykul, i in artykuly
             li.list-group-item
-                a(href="/artykuly/"+ artykul._id)=artykul.tytul
+                a(href="/artykuly/"+ artykul.id)=artykul.tytul

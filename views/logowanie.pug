@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Login
+  form(method='POST', action='/uzytkownicy/logowanie')
+    #form-group
+      label Login:
+      input.form-control(name='uzytkownik',type='text')
+    #form-group
+      label Hasło:
+      input.form-control(name='haslo',type='password')
+    br
+    input.btn.btn-primary(type='submit',value='Submit')

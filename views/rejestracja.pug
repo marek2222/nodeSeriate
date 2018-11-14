@@ -1,0 +1,22 @@
+extends layout
+ 
+block content
+    h1 #{title}
+    form(method='POST', action='/uzytkownicy/rejestracja')
+        #form-group
+            label Nazwa:
+            input.form-control(name='nazwa', type='text')
+        #form-group
+            label Email:
+            input.form-control(name='email', type='text')
+        #form-group
+            label Użytkownik:
+            input.form-control(name='uzytkownik', type='text')
+        #form-group
+            label Hasło:
+            input.form-control(name='haslo', type='password')
+        #form-group
+            label Wprowadz hasło ponownie:
+            input.form-control(name='haslo2', type='password')
+        br
+        input.btn.btn-primary(type='submit', value='Submit')

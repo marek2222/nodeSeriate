@@ -8,7 +8,8 @@ const expressValidator = require('express-validator');
 
 const flash = require('connect-flash');
 const session = require('express-session');
-const secret = require('./config/secret');  
+const passport = require('passport');
+const secret = require('./config/secret');
 const sql = require('seriate');
 sql.setDefaultConfig(secret);
 
@@ -63,8 +64,20 @@ app.use(expressValidator({
     }
 }));
 
+// Passport config
+require('./config/passport')(passport);
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+ 
 
 //Home route
+app.get('*', function(req, res, next){
+    // console.log('req.user: '+ req.user);
+    res.locals.user = req.user || null;
+    next();
+});
+
 app.get('/', function(req, res){
     sql.execute({
         query: sql.fromFile('./sql/artykuly')
@@ -76,12 +89,16 @@ app.get('/', function(req, res){
     }, function (err){
         console.log ('Coś się stało:', err);
     });
-}); 
+});
 
 // Route files
 let artykuly = require('./routes/artykuly');
+// let uzytkownicy = require('./routes/uzytkownicy');
+let users = require('./routes/users');
 app.use('/artykuly', artykuly);
-
+// app.use('/uzytkownicy', uzytkownicy);
+app.use('/users', users);    
+ 
 /// Start server
 app.listen(port, function(){
     console.log('Example app listening on port 3000!');

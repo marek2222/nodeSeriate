@@ -57,3 +57,9 @@ You can use this:
 https://www.npmjs.com/package/express-session
 https://github.com/expressjs/express-messages
 https://github.com/express-validator/express-validator
+
+
+
+User registaration
+--------------------------------------------------------------------
+    > npm install --save passport passport-local bcryptjs

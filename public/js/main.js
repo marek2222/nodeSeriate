@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('.usun-artykul').on('click', function(e){
+        // console.log('aaaaaaaaaaaaa');
         $target = $(e.target);
         const id = $target.attr('data-id');
         console.log(id);

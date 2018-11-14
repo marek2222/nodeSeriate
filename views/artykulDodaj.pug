@@ -1,16 +1,16 @@
 extends layout
-
+ 
 block content
     h1 #{title}
     form(method='POST', action='/artykuly/dodaj')
         #form-group
-            label Title:
+            label Tytuł:
             input.form-control(name='tytul', type='text')
         #form-group
-            label Author:
+            label Autor:
             input.form-control(name='autor', type='text')
         #form-group
-            label Body:
+            label Ciało:
             textarea.form-control(name='cialo', type='text')
         br
         input.btn.btn-primary(type='submit', value='Submit')

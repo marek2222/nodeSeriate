@@ -4,13 +4,13 @@ block content
     h1 #{title}
     form(method='POST', action='/artykuly/edycja/' + artykul.id)
         #form-group
-            label Title:
+            label Tytuł:
             input.form-control(name='tytul', type='text', value=artykul.tytul)  
         #form-group
-            label Author:
+            label Autor:
             input.form-control(name='autor', type='text', value=artykul.autor)
         #form-group
-            label Body:
+            label Ciało:
             textarea.form-control(name='cialo')= artykul.cialo 
         br
         input.btn.btn-primary(type='submit', value='Submit')

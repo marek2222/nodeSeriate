@@ -1,27 +1,36 @@
 doctype html
 html
     head
-        title knowledgebase
+        title nodeSeriate
         link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
         link(rel='stylesheet' href='/css/style.css')
     body
         nav.navbar.navbar-expand-md.navbar-dark.bg-dark
-            a.navbar-brand(href='/') SeriateLogin
+            a.navbar-brand(href='/') nodeSeriate
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navDefault', aria-controls='navDefault', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             #navDefault.collapse.navbar-collapse
                 ul.navbar-nav.mr-auto
                     li.nav-item.active
                         a.nav-link(href='/')
-                            | Home
+                            | Start
                             span.sr-only (current)
                     li.nav-item.active
                         a.nav-link(href='/artykuly/dodaj') Dodaj artykuł
                 ul.navbar-nav
-                    li.nav-item
-                        a.nav-link(href='/users/register') Register
-                    li.nav-item.text-nowrap
-                        a.nav-link(href='/users/login') Login
+                    if user
+                        li.nav-item 
+                            a.nav-link(href='/users/logout') Logout
+                    else
+                        li.nav-item
+                            a.nav-link(href='/users/register') Register
+                        li.nav-item.text-nowrap
+                            a.nav-link(href='/users/login') Login
+                            //- li.nav-item
+                            //-     a.nav-link(href='/uzytkownicy/rejestracja') Rejestracja
+                            //- li.nav-item.text-nowrap
+                            //-     a.nav-link(href='/uzytkownicy/logowanie') Logowanie
+
         .container
             != messages('message', locals)
             if errors

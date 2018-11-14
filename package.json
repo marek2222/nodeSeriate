@@ -1,33 +1,30 @@
 {
-    "name": "nodeSeriate",
-    "version": "1.0.0",
-    "description": "Project with login and registeration created in nodejs and express, connected to SqlServer by seriate.",
-    "main": "app.js",
-    "scripts": {
-        "start": "node app.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/marek2222/nodeSeriate.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/marek2222/nodeSeriate/issues"
-    },
-    "homepage": "https://github.com/marek2222/nodeSeriate#readme",
-    "dependencies": {
-        "body-parser": "^1.18.3",
-        "connect-flash": "^0.1.1",
-        "express": "^4.16.4",
-        "express-messages": "^1.0.1",
-        "express-session": "^1.15.6",
-        "express-validator": "^5.3.0",
-        "pug": "^2.0.3",
-        "seriate": "^1.0.0"
-    },
-    "devDependencies": {
-        "nodemon": "^1.18.6"
-    }
+  "name": "nodeSeriate",
+  "version": "1.0.0",
+  "description": "Project with login and registeration created in nodejs and express, connected to SqlServer by seriate.",
+  "main": "app.js",
+  "scripts": {
+      "start": "node app.js"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/marek2222/nodeSeriate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+      "url": "https://github.com/marek2222/nodeSeriate/issues"
+  },
+  "homepage": "https://github.com/marek2222/nodeSeriate#readme",
+  "dependencies": {
+      "body-parser": "^1.18.3",
+      "connect-flash": "^0.1.1",
+      "express": "^4.16.4",
+      "express-messages": "^1.0.1",
+      "express-session": "^1.15.6",
+      "express-validator": "^5.3.0",
+      "pug": "^2.0.3",
+      "seriate": "^1.0.0"
+  }
 }

@@ -21,10 +21,14 @@ router.post('/dodaj', function(req, res){
     // ]
     // const errors = validationResult(req);
 
-    req.checkBody('tytul','Tytuł jest wymagany').notEmpty();
+    req.checkBody('tytul').notEmpty().withMessage('Tytuł jest wymagany...');
+    req.checkBody('autor').notEmpty().withMessage('Autor jest wymagany...');
+    req.checkBody('cialo').notEmpty().withMessage('Cialo jest wymagane...');
     req.checkBody('tytul').isLength({min: 5}).isLength({max: 20}).withMessage('Tytuł powinien mieć  5 do 20 znaków...');
-    req.checkBody('autor','Autor jest wymagany').notEmpty();
-    req.checkBody('cialo','Ciało jest wymagane').notEmpty();
+    req.checkBody('autor').isLength({max: 30}).withMessage('Autor jest wymagany (max. 30 znaków)...');
+    req.checkBody('cialo').isLength({max: 50}).withMessage('Cialo jest wymagane (max. 50 znaków)...');
+    
+
     let errors = req.validationErrors();
     if (errors) {
         res.render('artykulDodaj', {
