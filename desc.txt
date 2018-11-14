@@ -19,3 +19,20 @@ Lets Install 'nodemon' only for development state
     > npm install nodemon --save-dev
 to run automatically app by:
     > nodemon
+
+Create directory: 'config' add file 'secret.js'.
+Add configuration settings for database connection in this file: 
+    const config = {
+        name: 'default',
+        server: 'localhost\\SQLEXPRESS',
+        user: 'sa',
+        password: '_Marek2222',
+        database: 'nodejs'
+    }
+    module.exports = config;
+
+Next install dependencies to Sql Server:
+    > npm install --save seriate
+
+Body Parser Middleware
+    > npm install --save body-parser
