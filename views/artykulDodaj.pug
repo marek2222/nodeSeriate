@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1 #{title}
-    form(method='POST', action='/artykul/dodaj')
+    form(method='POST', action='/artykuly/dodaj')
         #form-group
             label Title:
             input.form-control(name='tytul', type='text')
@@ -12,4 +12,5 @@ block content
         #form-group
             label Body:
             textarea.form-control(name='cialo', type='text')
+        br
         input.btn.btn-primary(type='submit', value='Submit')

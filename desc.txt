@@ -50,3 +50,10 @@ Create public directory: public/bower_components
 
 
 --------------------------------------------------------------------
+You can use this:
+    https://html2jade.org/
+ 
+    > npm install --save express-messages express-session connect-flash express-validator
+https://www.npmjs.com/package/express-session
+https://github.com/expressjs/express-messages
+https://github.com/express-validator/express-validator
