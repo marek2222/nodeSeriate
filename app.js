@@ -5,25 +5,25 @@ const bodyParser = require('body-parser');
 const secret = require('./config/secret');  
 const sql = require('seriate');
 sql.setDefaultConfig(secret);
- 
- 
+
+
 // Init app
 const app = express();
-  
+ 
 // Load View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
- 
+
 // Set Public folder: to images, Css, files
 app.use(express.static(path.join(__dirname, 'public')));
-  
+ 
 // Body Parser Middleware - To handle HTTP POST request in Express.js version 4 and above, you need to install middleware module called body-parser. body-parser extract the entire body portion of an incoming request stream and exposes it on req.body.
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
- 
- 
+
+
 //Home route
 app.get('/', function(req, res){
     sql.execute({
@@ -34,7 +34,7 @@ app.get('/', function(req, res){
             artykuly: results
         });
     }, function (err){
-        console.log ('Coś się stało: artykuly: ', err);
+        console.log ('Coś się stało:', err);
     });
 });
 
@@ -50,17 +50,17 @@ app.get('/artykul/:id', function(req, res){
             artykul: results[0]
         });
     }, function (err){
-        console.log ('Coś się stało: artykul: ', err);
+        console.log ('Coś się stało:', err);
     });
 });
- 
+
 // Add route
 app.get('/artykul/dodaj', function(req, res){
     res.render('artykulDodaj', {
         tytul: 'Dodaj Artykuł'
     });
 });
- 
+
 // Add Submit POST Route
 app.post('/artykul/dodaj', function(req, res){
     sql.execute({
@@ -80,10 +80,9 @@ app.post('/artykul/dodaj', function(req, res){
     }).then( function(results){
         res.redirect('/');
     }, function (err){
-        console.log ('Coś się stało: artykulDodaj: ', err);
+        console.log ('Coś się stało:', err);
     });
 });
-     
     
 
 // UPDATE form
@@ -99,7 +98,7 @@ app.get('/artykul/edycja/:id', function(req, res){
             artykul: results[0]
         });
     }, function (err){
-        console.log ('Coś się stało: artykul edycja get: ', err);
+        console.log ('Coś się stało:', err);
     });
 });
   
@@ -116,24 +115,30 @@ app.post('/artykul/edycja/:id', function(req, res){
     }).then( function(results){
         res.redirect('/');
     }, function (err){
-        console.log ('Coś się stało: artykul edycja post: ', err);
+        console.log ('Coś się stało:', err);
     });
 });
 
 app.delete('/artykul/:id', function(req, res){
+    let id = {id:req.param.id}
+
     sql.execute({
         query: sql.fromFile('./sql/artykulUsun'),
         params: {
-            id:     { type: sql.INT,  val: req.params.id  }
+            id: {
+				type: sql.INT,
+                nullable: false,
+                val: id
+            }
         }
     }).then( function(results){
         res.send('Success');
     }, function (err){
-        console.log ('Coś się stało: artykulUsun: ', err);
+        console.log ('Coś się stało:', err);
     });
 });
-     
-
+    
+ 
 /// Start server
 app.listen(port, function(){
     console.log('Example app listening on port 3000!');

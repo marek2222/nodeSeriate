@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST', action='/artykul/edycja/' + artykul.id)
+        #form-group
+            label Title:
+            input.form-control(name='tytul', type='text', value=artykul.tytul)  
+        #form-group
+            label Author:
+            input.form-control(name='autor', type='text', value=artykul.autor)
+        #form-group
+            label Body:
+            textarea.form-control(name='cialo')= artykul.cialo 
+        br
+        input.btn.btn-primary(type='submit', value='Submit')
