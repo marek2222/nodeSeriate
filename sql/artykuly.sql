@@ -1,2 +1,2 @@
 select 	id,tytul,autor,cialo	
-from nodejs.[dbo].[Artykuly]
+from nodejs.[dbo].Artykuly

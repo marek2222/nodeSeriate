@@ -1,19 +1,19 @@
 const express = require('express');
 const port = 3000;
 const path = require('path');
-
 const bodyParser = require('body-parser');
 const secret = require('./config/secret');  
 const sql = require('seriate');
 sql.setDefaultConfig(secret);
  
+ 
 // Init app
 const app = express();
- 
+  
 // Load View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
+ 
 // Set Public folder: to images, Css, files
 app.use(express.static(path.join(__dirname, 'public')));
   
@@ -22,32 +22,49 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
-
+ 
+ 
 //Home route
 app.get('/', function(req, res){
     sql.execute({
-        query: sql.fromFile("./sql/artykuly")
+        query: sql.fromFile('./sql/artykuly')
     }).then( function(results){
         res.render('index', {
             tytul:'Artykuły', 
             artykuly: results
         });
     }, function (err){
-        console.log ("Something bad happened:", err);
+        console.log ('Coś się stało: artykuly: ', err);
     });
 });
 
+// Get single Articles
+app.get('/artykul/:id', function(req, res){
+    sql.execute({
+        query: sql.fromFile('./sql/artykul'),
+        params: {
+            id: {	type: sql.INT, val: req.params.id }
+        }
+    }).then( function(results){
+        res.render('artykul', {
+            artykul: results[0]
+        });
+    }, function (err){
+        console.log ('Coś się stało: artykul: ', err);
+    });
+});
+ 
 // Add route
-app.get('/artykuly/dodaj', function(req, res){
-    res.render('dodaj_artykul', {
+app.get('/artykul/dodaj', function(req, res){
+    res.render('artykulDodaj', {
         tytul: 'Dodaj Artykuł'
     });
 });
-
+ 
 // Add Submit POST Route
-app.post('/artykuly/dodaj', function(req, res){
+app.post('/artykul/dodaj', function(req, res){
     sql.execute({
-        query: sql.fromFile('./sql/dodaj_artykul'),        // query: 'insert nodejs.dbo.[_b_Articles](tytul,autor,cialo) select tytul,autor,cialo from @tabela',
+        query: sql.fromFile('./sql/artykulDodaj'),        // query: 'insert nodejs.dbo.[_b_Articles](tytul,autor,cialo) select tytul,autor,cialo from @tabela',
         params: {
             tabela: {
                 val: [{   tytul: req.body.tytul, 
@@ -63,13 +80,60 @@ app.post('/artykuly/dodaj', function(req, res){
     }).then( function(results){
         res.redirect('/');
     }, function (err){
-        console.log ('Something bad happened:', err);
+        console.log ('Coś się stało: artykulDodaj: ', err);
     });
 });
+     
     
-    
-    
+
+// UPDATE form
+app.get('/artykul/edycja/:id', function(req, res){
+    sql.execute({
+        query: sql.fromFile('./sql/artykul'),
+        params: {
+            id: {	type: sql.INT, val: req.params.id }
+        }
+    }).then( function(results){
+        res.render('artykulEdycja', {
+            title:'Edycja artykułu',
+            artykul: results[0]
+        });
+    }, function (err){
+        console.log ('Coś się stało: artykul edycja get: ', err);
+    });
+});
   
+// Update Submit POST Route
+app.post('/artykul/edycja/:id', function(req, res){
+    sql.execute({
+        query: sql.fromFile('./sql/artykulEdytuj'), 
+        params: {
+            tytul:  { type: sql.NVARCHAR(50),  val: req.body.tytul }, 
+            autor: { type: sql.NVARCHAR(50),  val: req.body.autor }, 
+            cialo:  { type: sql.NVARCHAR(50),  val: req.body.cialo },
+            id:       { type: sql.INT,                       val: req.params.id }
+        }
+    }).then( function(results){
+        res.redirect('/');
+    }, function (err){
+        console.log ('Coś się stało: artykul edycja post: ', err);
+    });
+});
+
+app.delete('/artykul/:id', function(req, res){
+    sql.execute({
+        query: sql.fromFile('./sql/artykulUsun'),
+        params: {
+            id:     { type: sql.INT,  val: req.params.id  }
+        }
+    }).then( function(results){
+        res.send('Success');
+    }, function (err){
+        console.log ('Coś się stało: artykulUsun: ', err);
+    });
+});
+     
+
 /// Start server
 app.listen(port, function(){
     console.log('Example app listening on port 3000!');
