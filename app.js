@@ -172,6 +172,7 @@ app.post('/artykul/edycja/:id', function(req, res){
             id:       { type: sql.INT,                       val: req.params.id }
         }
     }).then( function(results){
+        req.flash('success', 'Artykuł zaktualizowany');
         res.redirect('/');
     }, function (err){
         console.log ('Coś się stało:', err);
@@ -185,6 +186,7 @@ app.delete('/artykul/:id', function(req, res){
             id:     { type: sql.INT,  val: req.params.id  }
         }
     }).then( function(results){
+        req.flash('success', 'Artykuł usunięty');
         res.send('Success');
     }, function (err){
         console.log ('Coś się stało:', err);
