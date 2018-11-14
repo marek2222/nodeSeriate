@@ -1,0 +1,21 @@
+Create directory 'nodeSeriate' and create a package.json file by
+    > npm init -y
+
+In package.json add in  "scripts":
+    "start": "node app.js"
+and replace in "main":
+    "main": "app.js",
+
+
+Next install dependencies:
+    > npm install --save express
+    > npm install pug --save
+    > npm install body-parser --save
+to run app by hand:
+    > npm start
+
+
+Lets Install 'nodemon' only for development state
+    > npm install nodemon --save-dev
+to run automatically app by:
+    > nodemon
