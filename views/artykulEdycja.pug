@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1 #{title}
-    form(method='POST', action='/artykul/edycja/' + artykul.id)
+    form(method='POST', action='/artykuly/edycja/' + artykul.id)
         #form-group
             label Title:
             input.form-control(name='tytul', type='text', value=artykul.tytul)  

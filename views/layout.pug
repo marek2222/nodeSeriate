@@ -1,7 +1,6 @@
 doctype html
 html
     head
-        title seriateLogin
         title knowledgebase
         link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
         link(rel='stylesheet' href='/css/style.css')
@@ -17,13 +16,12 @@ html
                             | Home
                             span.sr-only (current)
                     li.nav-item.active
-                        a.nav-link(href='/artykul/dodaj') Dodaj artykuł
+                        a.nav-link(href='/artykuly/dodaj') Dodaj artykuł
                 ul.navbar-nav
                     li.nav-item
                         a.nav-link(href='/users/register') Register
                     li.nav-item.text-nowrap
                         a.nav-link(href='/users/login') Login
-
         .container
             != messages('message', locals)
             if errors
@@ -37,4 +35,3 @@ html
         script(src='/bower_components/jQuery/dist/jquery.js')
         script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
         script(src='/js/main.js')
-
