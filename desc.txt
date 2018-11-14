@@ -1,3 +1,4 @@
+--------------------------------------------------------------------
 Create directory 'nodeSeriate' and create a package.json file by
     > npm init -y
 
@@ -6,7 +7,6 @@ In package.json add in  "scripts":
 and replace in "main":
     "main": "app.js",
 
-
 Next install dependencies:
     > npm install --save express
     > npm install pug --save
@@ -14,12 +14,13 @@ Next install dependencies:
 to run app by hand:
     > npm start
 
-
 Lets Install 'nodemon' only for development state
     > npm install nodemon --save-dev
 to run automatically app by:
     > nodemon
 
+
+--------------------------------------------------------------------
 Create directory: 'config' add file 'secret.js'.
 Add configuration settings for database connection in this file: 
     const config = {
@@ -36,3 +37,16 @@ Next install dependencies to Sql Server:
 
 Body Parser Middleware
     > npm install --save body-parser
+
+
+--------------------------------------------------------------------
+    > npm install -g bower
+To install latest version npm:
+    > npm install npm@latest -g
+
+Create public directory: public/bower_components
+    > bower install bootstrap
+    > bower install jquery
+
+
+--------------------------------------------------------------------

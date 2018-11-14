@@ -2,9 +2,43 @@ doctype html
 html
     head
         title seriateLogin
+        title knowledgebase
+        link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
     body
-        block content
-        br
-        hr
-        footer
-            p Copyright &copy; 2018
+        nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+            a.navbar-brand(href='/') SeriateLogin
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navDefault', aria-controls='navDefault', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navDefault.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item.active
+                        a.nav-link(href='/')
+                            | Home
+                            span.sr-only (current)
+                ul.navbar-nav
+                    li.nav-item
+                        a.nav-link(href='/users/register') Register
+                    li.nav-item.text-nowrap
+                        a.nav-link(href='/users/login') Login
+
+        .container
+            block content
+            br
+            hr
+            footer
+                p Copyright &copy; 2017
+        script(src='/bower_components/jQuery/dist/jquery.js')
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+
+
+
+//- doctype html
+//- html
+//-     head
+//-         title seriateLogin
+//-     body
+//-         block content
+//-         br
+//-         hr
+//-         footer
+//-             p Copyright &copy; 2018
