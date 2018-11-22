@@ -63,7 +63,7 @@ router.post('/dodaj', function(req, res){
             req.flash('success', 'Artykuł został dodany');
             res.redirect('/');
         }, function (err){
-            console.log ('Coś się stało:', err);
+            console.log ('Coś się stało: dodaj: ', err);
         });
     }
 });

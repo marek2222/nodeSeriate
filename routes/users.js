@@ -88,15 +88,34 @@ router.post('/register', function(req, res){
 // Login Form
 router.get('/login', function(req, res){
     res.render('login');
-  });
+});
    
   // Login process
 router.post('/login', function(req, res, next){
-    passport.authenticate('local', {
-        successRedirect:'/',
-        failureRedirect:'/users/login',
-        failureFlash: true
-    })(req, res, next);
+    if (req.body.username === '') {
+        req.checkBody('username', 'Cialo jest wymagane...').notEmpty();
+    } else{
+        req.checkBody('username', 'Cialo to max. 30 znaków...').isLength({max: 30});
+    }
+    if (req.body.password === '') {
+        req.checkBody('password', 'Hasło jest wymagane...').notEmpty();
+    } else{
+        req.checkBody('password', 'Hasło to max. 30 znaków...').isLength({max: 30});
+    }
+
+    let errors = req.validationErrors();
+    if (errors) {
+        res.render('login', {
+            errors: errors
+        });
+    }
+    else {
+        passport.authenticate('local', {
+            successRedirect:'/',
+            failureRedirect:'/users/login',
+            failureFlash: true
+        })(req, res, next);
+    }
 });
   
 // logout
