@@ -14,12 +14,35 @@ router.get('/register', function(req, res){
 
 // Register process
 router.post('/register', function(req, res){
-    req.checkBody('name').notEmpty().isLength({max: 30}).withMessage('Nazwa jest wymagana (max. 30 znaków)...');
-    req.checkBody('email').notEmpty().isLength({max: 30}).withMessage('Email jest wymagany (max. 30 znaków)...');
-    req.checkBody('email','Email nie jest poprawny...').isEmail();
-    req.checkBody('username','Uzytkownik jest wymagany...').notEmpty();
-    req.checkBody('password','Haslo jest wymagane...').notEmpty();
-    req.checkBody('password2','Hasła nie zgadzają się...').equals(req.body.password);
+
+    if (req.body.name === '') {
+        req.checkBody('name','Nazwa jest wymagana...').notEmpty();
+    } else {
+        req.checkBody('name', 'Nazwa to max. 30 znaków...').isLength({max: 30});
+    }
+    if (req.body.email === '') {
+        req.checkBody('email','Email jest wymagany...').notEmpty();
+    } else {
+        req.checkBody('email','Email nie jest poprawny...').isEmail();
+        req.checkBody('email', 'Email to max. 30 znaków...').isLength({max: 30});
+    }
+    if (req.body.username === '') {
+        req.checkBody('username','Uzytkownik jest wymagany...').notEmpty();
+    } else {
+        req.checkBody('username','Uzytkownik to max. 30 znaków...').isLength({max: 30});
+    }
+    if (req.body.password === '') {
+        req.checkBody('password','Hasło jest wymagane...').notEmpty();
+    } else {
+        req.checkBody('password','Hasło to max. 30 znaków...').isLength({max: 30});
+    }
+    if (req.body.password2 === '') {
+        req.checkBody('password2','Hasło potwierdzające jest wymagane...').notEmpty();
+    } else {
+        req.checkBody('password2','Hasło potwierdzające to max. 30 znaków...').isLength({max: 30});
+        req.checkBody('password2','Hasła nie zgadzają się...').equals(req.body.password);
+    }
+
     let errors = req.validationErrors();
     if (errors) {
         res.render('register', {

@@ -21,13 +21,21 @@ router.post('/dodaj', function(req, res){
     // ]
     // const errors = validationResult(req);
 
-    req.checkBody('tytul').notEmpty().withMessage('Tytuł jest wymagany...');
-    req.checkBody('autor').notEmpty().withMessage('Autor jest wymagany...');
-    req.checkBody('cialo').notEmpty().withMessage('Cialo jest wymagane...');
-    req.checkBody('tytul').isLength({min: 5}).isLength({max: 20}).withMessage('Tytuł powinien mieć  5 do 20 znaków...');
-    req.checkBody('autor').isLength({max: 30}).withMessage('Autor jest wymagany (max. 30 znaków)...');
-    req.checkBody('cialo').isLength({max: 50}).withMessage('Cialo jest wymagane (max. 50 znaków)...');
-    
+    if (req.body.tytul === '') {
+        req.checkBody('tytul').notEmpty().withMessage('Tytuł jest wymagany...');
+    } else{
+        req.checkBody('tytul','Tytuł powinien mieć  5 do 20 znaków...').isLength({min: 5}).isLength({max: 20});
+    }
+    if (req.body.autor === '') {
+        req.checkBody('autor').notEmpty().withMessage('Autor jest wymagany...');
+    } else{
+        req.checkBody('autor', 'Autor to max. 30 znaków...').isLength({max: 30});
+    }
+    if (req.body.cialo === '') {
+        req.checkBody('cialo').notEmpty().withMessage('Cialo jest wymagane...');
+    } else{
+        req.checkBody('cialo', 'Cialo to max. 50 znaków...').isLength({max: 50});
+    }
 
     let errors = req.validationErrors();
     if (errors) {
