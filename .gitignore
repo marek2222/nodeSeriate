@@ -1,3 +1,6 @@
+# My file
+/config/secret.js
+
 # Logs
 logs
 *.log
